@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
+</head>
+
+<body>
+    <h1>Vue Practice</h1>
+    <div id="app">
+        <h2>1. Increase/decrease number button</h2>
+        <button v-on:click="number++">Increase number</button>
+        <button @click="number--">Decrease number</button>
+
+        <p> {{number}}</p>
+        <h2>2. Change word button</h2>
+
+        <p>{{word}}</p>
+
+        <button @click="changeTitle('I changed!')">Change word</button>
+        <h2>3. Show/hide info button</h2>
+
+
+        <button @click="toggleShowInfo" class="block-button">
+            <span v-if="showInfo">Hide info</span>
+            <!-- <span v-if="!showInfo">Show info</span> -->
+            <span v-else>Show info</span>
+        </button>
+        <div v-show="!showInfo">Currently hiding country info</div>
+        <div v-if="showInfo">
+            <!-- Using v-show-->
+            <div v-show="showInfo">Currently showing country info:</div>
+
+            <div v-if="showInfo">
+                <p class="bold-text">Click on the boxes to change to "fav" class. The colour should toggle.</p>
+                <ul>
+                    <!-- Add class if the associated value is true-->
+                    <li v-for="place in places" :class="{fav: place.isFav}" @click="toggleFav(place)">
+                        <h3>{{place.name}}</h3>
+                        <p>{{place.country}}</p>
+                        <!-- using bindings for the images-->
+                        <img :src="place.img" alt="place.name">
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>4. Link using bind</h2>
+
+        <div>
+            <!-- Create binding for an attribute-->
+            <a :href="url" target="_blank">A link attribute using bind</a>
+        </div>
+        <h2>5. Different mouse events (check console to see!)</h2>
+
+        <div class="box">
+            <div class="small-box" @mouseover="handleEvent($event, 5)">Mouse over (look at console to view event info)
+            </div>
+            <div class="small-box" @mouseleave="handleEvent">Mouse leave (look at console to view event info)</div>
+            <div class="small-box" @dblclick="handleEvent">Double click (look at console to view event info)</div>
+            <div class="small-box" @mousemove="handleMouseMove">Position X - {{x}}, Position Y - {{y}}</div>
+
+
+        </div>
+
+
+
+    </div>
+    <script src="app.js"></script>
+</body>
+<style>
+    body {
+        font-family: sans-serif;
+    }
+
+    .box {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .small-box {
+        background-color: rgb(232, 221, 208);
+        text-align: center;
+        /* Optional: Center text horizontally */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100px;
+        border-radius: 20px;
+
+    }
+
+
+    .bold-text {
+        font-weight: bold;
+    }
+
+    button {
+        background-color: rgb(198, 173, 221);
+        height: 40px;
+        border-radius: 10px;
+        border-style: none;
+        margin: 5px;
+    }
+
+    img {
+        max-width: 30%;
+    }
+
+    li {
+        background: rgb(242, 242, 234);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        margin: 30px auto;
+        border-radius: 20px;
+    }
+
+    .fav {
+        background-color: rgb(127, 192, 192);
+    }
+</style>
+
+</html>
